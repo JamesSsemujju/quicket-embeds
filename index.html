@@ -3,195 +3,223 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>One embed. Every kind of event.</title>
-<meta name="description" content="Paste a Quicket embed code and watch the same checkout live inside eight finished event page designs.">
+<title>Every buyer surface. One embed.</title>
+<meta name="description" content="Load a Quicket event per capability and see seating, promo codes, registration gates and access codes running live inside finished event pages.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --ink:#0a0c0f; --ink2:#454e59; --ink3:#7d8794;
   --line:#e4e8ec; --bg:#fff; --bg2:#f5f7f9;
   --brand:#0f766e; --brand-soft:#e6f4f2;
-  --r:16px;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   --serif:'Fraunces',Georgia,serif;
   --display:'Bebas Neue',Impact,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
 body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
-img{display:block;max-width:100%}
 
 /* ---------------- top bar ---------------- */
-.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;height:62px;gap:20px}
-.logo{font-weight:800;letter-spacing:-.03em;font-size:18px}
+.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;height:62px;gap:18px}
+.logo{font-weight:800;letter-spacing:-.03em;font-size:18px;white-space:nowrap}
 .logo i{color:var(--brand);font-style:normal}
 .top .spacer{margin-left:auto}
-.mini{font-size:13px;color:var(--ink3);display:flex;align-items:center;gap:8px}
+.hctl{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ink3);white-space:nowrap}
+.hctl input[type=range]{width:120px;accent-color:var(--brand)}
+.hval{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink2);min-width:40px}
 .pill{background:var(--brand-soft);color:var(--brand);font-weight:600;padding:5px 11px;border-radius:99px;font-size:12.5px;white-space:nowrap}
+@media(max-width:940px){.hctl{display:none}}
+@media(max-width:620px){.pill{display:none}}
 
 /* ---------------- hero ---------------- */
-.hero{padding:76px 0 44px;text-align:center}
+.hero{padding:70px 0 30px;text-align:center}
 .kick{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
-h1{font-size:clamp(38px,6.4vw,74px);line-height:.98;letter-spacing:-.045em;margin:18px auto 18px;max-width:14ch;font-weight:800}
+h1{font-size:clamp(36px,6vw,70px);line-height:.98;letter-spacing:-.045em;margin:18px auto;max-width:15ch;font-weight:800}
 h1 em{font-style:normal;color:var(--brand)}
-.sub{font-size:clamp(16px,1.9vw,20px);color:var(--ink2);max-width:60ch;margin:0 auto}
+.sub{font-size:clamp(16px,1.9vw,20px);color:var(--ink2);max-width:62ch;margin:0 auto}
 
-/* ---------------- paste ---------------- */
-.paste{max-width:820px;margin:40px auto 0}
-.paste-box{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:8px;display:flex;gap:8px;align-items:stretch}
-.paste-box textarea{
-  flex:1;border:0;background:transparent;resize:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  font-size:13px;line-height:1.5;padding:14px;color:var(--ink);min-height:74px;outline:none;
-}
-.paste-box textarea::placeholder{color:var(--ink3)}
-.go{border:0;border-radius:11px;background:var(--ink);color:#fff;font-family:var(--sans);font-weight:600;font-size:15px;padding:0 26px;cursor:pointer;white-space:nowrap}
-.go:hover{background:var(--brand)}
-.status{margin-top:12px;font-size:13.5px;display:flex;gap:10px;align-items:center;justify-content:center;min-height:22px}
-.ok{color:var(--brand);font-weight:600}
-.bad{color:#b4231b;font-weight:600}
-.hint{color:var(--ink3);text-align:center;font-size:13px;margin-top:10px}
+/* ---------------- steps ---------------- */
+.stepnum{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.stepnum b{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:11px}
 
-/* ---------------- chooser ---------------- */
-.chooser{padding:52px 0 0}
-.chooser h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:0 0 18px;text-align:center}
+/* ---------------- step 1: load ---------------- */
+.load{padding:44px 0 0}
+.loadhead{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.loadhead p{margin:0;color:var(--ink2);font-size:15px;max-width:60ch}
+.loadhead .spacer{margin-left:auto}
+.toggle{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 15px;font-size:13.5px;font-family:var(--sans);color:var(--ink2);cursor:pointer;white-space:nowrap}
+.toggle:hover{border-color:var(--brand);color:var(--brand)}
+
+.master{display:flex;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:8px;margin-bottom:14px}
+.master input{flex:1;border:0;background:transparent;outline:none;font-family:ui-monospace,Menlo,monospace;font-size:13px;padding:12px}
+.master input::placeholder{color:var(--ink3)}
+.master button{border:0;border-radius:10px;background:var(--ink);color:#fff;font-family:var(--sans);font-weight:600;font-size:14px;padding:0 20px;cursor:pointer;white-space:nowrap}
+.master button:hover{background:var(--brand)}
+
+.slots{display:grid;grid-template-columns:1fr;gap:9px}
+@media(min-width:900px){.slots{grid-template-columns:1fr 1fr}}
+.slotrow{border:1px solid var(--line);border-radius:13px;padding:13px 15px;display:grid;grid-template-columns:1fr;gap:9px;background:#fff}
+.slotrow.has{border-color:#bfe3dd;background:#fbfefd}
+.srh{display:flex;align-items:center;gap:9px}
+.dotst{width:8px;height:8px;border-radius:50%;background:#d7dde3;flex:0 0 8px}
+.slotrow.has .dotst{background:var(--brand)}
+.srh strong{font-size:14px;letter-spacing:-.01em}
+.srh .ctx{margin-left:auto;font-size:11px;color:var(--ink3);background:var(--bg2);padding:3px 9px;border-radius:99px;white-space:nowrap}
+.srp{font-size:12.5px;color:var(--ink3);margin:0}
+.slotrow input{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;outline:none;color:var(--ink)}
+.slotrow input:focus{border-color:var(--brand)}
+.slotrow .meta{font-size:11.5px;color:var(--brand);font-weight:600;min-height:15px}
+.collapsed .master,.collapsed .slots{display:none}
+
+/* ---------------- step 2: pick ---------------- */
+.chooser{padding:48px 0 0}
 .grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr)}}
-.pick{position:relative;border:0;padding:0;cursor:pointer;border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:var(--ink);font-family:var(--sans)}
-.pick .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s ease;opacity:.72}
+.pick{position:relative;border:0;padding:0;cursor:pointer;border-radius:12px;overflow:hidden;aspect-ratio:3/4.1;background:var(--ink);font-family:var(--sans);text-align:left}
+.pick .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s ease;opacity:.68}
 .pick:hover .ph{transform:scale(1.07)}
-.pick .vl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,10,.05),rgba(6,8,10,.82))}
-.pick .lb{position:absolute;left:10px;right:10px;bottom:10px;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:-.01em;text-align:left;line-height:1.25}
+.pick .vl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,10,.05),rgba(6,8,10,.88))}
+.pick .lb{position:absolute;left:10px;right:10px;bottom:9px;color:#fff}
+.pick .lb b{display:block;font-size:12.5px;font-weight:700;line-height:1.2}
+.pick .lb span{display:block;font-size:10.5px;opacity:.72;margin-top:2px}
+.pick .flag{position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:#facc15}
+.pick.has .flag{background:#34d399}
 .pick[aria-pressed="true"]{outline:3px solid var(--brand);outline-offset:2px}
 .pick[aria-pressed="true"] .ph{opacity:1}
 
 /* ---------------- stage ---------------- */
-.stage{padding:26px 0 90px}
+.stage{padding:22px 0 80px}
+.proves{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:14px}
+.proves b{font-size:17px;letter-spacing:-.02em}
+.proves span{font-size:14.5px;color:var(--ink2)}
 .browser{border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(10,12,15,.35)}
 .chrome{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#f0f2f5;border-bottom:1px solid var(--line)}
 .chrome i{width:11px;height:11px;border-radius:50%;background:#cdd3d9;display:block}
 .addr{flex:1;margin-left:10px;background:#fff;border-radius:7px;padding:6px 12px;font-size:12.5px;color:var(--ink3);font-family:ui-monospace,Menlo,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.viewport{background:#fff}
+.warn{background:#fef6e7;border-top:1px solid #f4e2bd;color:#7a5410;font-size:13px;padding:10px 16px}
 
 /* ================= TEMPLATES ================= */
-.tpl{--pad:clamp(26px,4.6vw,64px)}
+.tpl{--pad:clamp(26px,4.4vw,60px);--g1:#0f766e;--g2:#5eead4;--glow:15,118,110}
 .tpl *{box-sizing:border-box}
 .tpl .bleed{position:relative;overflow:hidden}
 .tpl .bleed .img{position:absolute;inset:0;background-size:cover;background-position:center}
-.tpl .slot{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 18px 44px -22px rgba(0,0,0,.4)}
-.tpl .slot iframe{display:block;width:100%;border:0}
 .tpl .eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
-.tpl .meta{font-size:13.5px;opacity:.75}
-.tpl .ttl{letter-spacing:-.035em;line-height:.95;margin:0}
+.tpl .ttl{letter-spacing:-.035em;line-height:.96;margin:0}
 .tpl .cta{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;padding:15px 30px;border-radius:99px}
+.tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:rgba(127,127,127,.14);width:fit-content}
 
-/* 1 festival */
-.t-festival .bleed{min-height:340px;display:flex;align-items:flex-end;padding:var(--pad)}
-.t-festival .img{filter:saturate(1.1)}
-.t-festival .vl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.72))}
+/* widget card with the animated border */
+.slot{position:relative;overflow:hidden;border-radius:20px;padding:3px;width:100%;max-width:540px;animation:qk-glow 3.4s ease-in-out infinite}
+.slot::before{content:"";position:absolute;inset:-70%;z-index:0;
+  background:conic-gradient(from 0deg,transparent 0deg 150deg,var(--g1) 215deg,var(--g2) 262deg,var(--g1) 300deg,transparent 355deg);
+  animation:qk-spin 4.2s linear infinite}
+.slot::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:17px;z-index:1}
+.slot-in{position:relative;z-index:2;border-radius:17px;overflow:hidden;background:#fff}
+.slot-in iframe{display:block;width:100%;border:0}
+@keyframes qk-spin{to{transform:rotate(360deg)}}
+@keyframes qk-glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(var(--glow),.30),0 18px 40px -20px rgba(0,0,0,.45)}
+  50%{box-shadow:0 0 0 12px rgba(var(--glow),0),0 18px 40px -20px rgba(0,0,0,.45)}
+}
+@media(prefers-reduced-motion:reduce){.slot,.slot::before{animation:none}.slot{box-shadow:0 18px 40px -20px rgba(0,0,0,.4)}}
+
+.duo{display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,52px);align-items:center;padding:var(--pad)}
+@media(min-width:880px){.duo{grid-template-columns:1fr 1fr}}
+.duo .side{display:flex;flex-direction:column;gap:14px}
+.duo .fit{display:flex;justify-content:center}
+@media(min-width:880px){.duo .fit{justify-content:flex-end}}
+.solo{padding:var(--pad);display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.facts{display:grid;margin-top:4px}
+.facts div{display:flex;gap:16px;padding:10px 0;font-size:14px;border-top:1px solid currentColor;border-color:inherit}
+.facts b{min-width:88px;font-weight:600;opacity:.95}
+.facts span{opacity:.72}
+
+.t-festival{--g1:#f97316;--g2:#fbbf24;--glow:249,115,22;background:#faf7f2;color:#3b352c}
+.t-festival .bleed{min-height:320px;display:flex;align-items:flex-end;padding:var(--pad)}
+.t-festival .vl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.72))}
 .t-festival .cap{position:relative;color:#fff}
-.t-festival .ttl{font-family:var(--display);font-size:clamp(44px,8vw,104px);letter-spacing:.01em}
-.t-festival .body{padding:var(--pad);background:#faf7f2;display:grid;gap:26px;grid-template-columns:1fr;}
-@media(min-width:840px){.t-festival .body{grid-template-columns:.85fr 1.15fr;align-items:start}}
-.t-festival h3{font-family:var(--display);font-size:30px;letter-spacing:.02em;margin:0 0 10px}
-.t-festival p{margin:0;color:#5a5249}
+.t-festival .ttl{font-family:var(--display);font-size:clamp(44px,7.6vw,96px);letter-spacing:.01em}
+.t-festival h3{font-family:var(--display);font-size:32px;letter-spacing:.02em;margin:0}
+.t-festival p{margin:0;color:#6b6155}
+.t-festival .facts{border-color:#e4dccd;color:#3b352c}
 
-/* 2 conference */
-.t-conference{background:#fbfbfc}
-.t-conference .split{display:grid;grid-template-columns:1fr;gap:0}
-@media(min-width:900px){.t-conference .split{grid-template-columns:1fr 1fr}}
-.t-conference .bleed{min-height:260px}
-.t-conference .pane{padding:var(--pad)}
-.t-conference .ttl{font-family:var(--serif);font-size:clamp(30px,3.6vw,46px);font-weight:600;letter-spacing:-.02em;line-height:1.04}
-.t-conference .eyebrow{color:#1e40af}
-.t-conference .rule{height:1px;background:#e6e9ee;margin:22px 0}
-.t-conference .row{display:flex;gap:14px;font-size:14px;color:#4a5260;padding:7px 0}
-.t-conference .row b{color:#0a0c0f;min-width:74px;font-weight:600}
-.t-conference .body{padding:0 var(--pad) var(--pad)}
+.t-conference{--g1:#1d4ed8;--g2:#60a5fa;--glow:29,78,216;background:#fbfbfc}
+.t-conference .bleed{min-height:250px}
+.t-conference .eyebrow{color:#1d4ed8}
+.t-conference .ttl{font-family:var(--serif);font-size:clamp(30px,3.5vw,44px);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.t-conference p{margin:0;color:#525b68}
+.t-conference .facts{border-color:#e6e9ee;color:#0a0c0f}
 
-/* 3 sports */
-.t-sports{background:#0b1220;color:#fff}
-.t-sports .bleed{min-height:220px;display:flex;align-items:center;padding:var(--pad)}
-.t-sports .vl{position:absolute;inset:0;background:linear-gradient(90deg,#0b1220 8%,rgba(11,18,32,.45) 60%,rgba(11,18,32,.85))}
+.t-sports{--g1:#14b8a6;--g2:#a7f3d0;--glow:20,184,166;background:#0b1220;color:#fff}
+.t-sports .bleed{min-height:210px;display:flex;align-items:center;padding:var(--pad)}
+.t-sports .vl{position:absolute;inset:0;background:linear-gradient(90deg,#0b1220 6%,rgba(11,18,32,.42) 58%,rgba(11,18,32,.88))}
 .t-sports .cap{position:relative}
 .t-sports .eyebrow{color:#5eead4}
-.t-sports .ttl{font-family:var(--display);font-size:clamp(34px,5.4vw,62px);letter-spacing:.02em;color:#fff}
-.t-sports .body{display:grid;grid-template-columns:1fr;gap:26px;padding:var(--pad)}
-@media(min-width:900px){.t-sports .body{grid-template-columns:.7fr 1.3fr}}
-.t-sports .fx{border-top:1px solid #1e2a40;padding:13px 0;display:flex;justify-content:space-between;font-size:14px}
-.t-sports .fx span{color:#8ba0bd}
+.t-sports .ttl{font-family:var(--display);font-size:clamp(34px,5.2vw,58px);letter-spacing:.02em}
+.t-sports .fx{border-top:1px solid #1e2a40;padding:13px 0;display:flex;justify-content:space-between;font-size:14px;color:#8ba0bd}
 .t-sports .fx.on{color:#5eead4;font-weight:700}
 
-/* 4 concert */
-.t-concert{background:#08080a;color:#fff;position:relative}
-.t-concert .bleed{min-height:560px;display:flex;align-items:center;padding:var(--pad)}
-.t-concert .img{filter:grayscale(.25) contrast(1.06)}
-.t-concert .vl{position:absolute;inset:0;background:radial-gradient(90% 90% at 18% 50%,rgba(8,8,10,.94),rgba(8,8,10,.35) 70%)}
-.t-concert .cap{position:relative;max-width:420px}
+.t-concert{--g1:#a855f7;--g2:#f0abfc;--glow:168,85,247;background:#08080a;color:#fff}
+.t-concert .bleed{position:relative;overflow:hidden}
+.t-concert .img{filter:grayscale(.2) contrast(1.06)}
+.t-concert .vl{position:absolute;inset:0;background:radial-gradient(95% 95% at 16% 50%,rgba(8,8,10,.95),rgba(8,8,10,.42) 72%)}
+.t-concert .duo{position:relative}
 .t-concert .eyebrow{color:#f0abfc}
-.t-concert .ttl{font-size:clamp(38px,5.6vw,68px);font-weight:800;margin:14px 0}
-.t-concert .float{position:relative;margin-left:auto;width:min(420px,100%)}
-.t-concert .inner{display:flex;gap:30px;align-items:center;flex-wrap:wrap;width:100%}
+.t-concert .ttl{font-size:clamp(38px,5.4vw,64px);font-weight:800}
+.t-concert p{margin:0;color:#b9b4c4}
+.t-concert .facts{border-color:#241f2e;color:#fff}
+.t-concert .code{font-family:ui-monospace,Menlo,monospace;background:#1b1522;border:1px dashed #4a3a5c;color:#f0abfc;padding:9px 14px;border-radius:9px;width:fit-content;font-size:13px}
 
-/* 5 theatre */
-.t-theatre{background:#fdfbf6;color:#2b2419}
-.t-theatre .body{padding:var(--pad);text-align:center;max-width:760px;margin:0 auto}
-.t-theatre .bleed{min-height:300px}
+.t-theatre{--g1:#b45309;--g2:#e7c680;--glow:180,83,9;background:#fdfbf6;color:#2b2419}
+.t-theatre .bleed{min-height:280px}
 .t-theatre .eyebrow{color:#9a7b3f}
-.t-theatre .ttl{font-family:var(--serif);font-size:clamp(32px,4.4vw,54px);font-weight:400;margin:14px 0 16px}
-.t-theatre p{color:#6b6153;max-width:52ch;margin:0 auto 26px}
+.t-theatre .ttl{font-family:var(--serif);font-size:clamp(32px,4.2vw,50px);font-weight:400}
+.t-theatre p{color:#6b6153;max-width:50ch;margin:0}
 .t-theatre .cta{background:#2b2419;color:#fdfbf6}
-.t-theatre .seatmap{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;max-width:420px;margin:0 auto 28px}
+.t-theatre .seatmap{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;max-width:400px}
 .t-theatre .seatmap i{width:13px;height:13px;border-radius:3px;background:#e0d6c2;display:block}
-.t-theatre .seatmap i.x{background:#2b2419;opacity:.28}
+.t-theatre .seatmap i.x{background:#2b2419;opacity:.26}
 
-/* 6 marathon */
-.t-marathon{background:#fff}
-.t-marathon .bleed{min-height:300px;display:flex;align-items:flex-end;padding:var(--pad)}
-.t-marathon .vl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.6))}
+.t-marathon{--g1:#ea580c;--g2:#fdba74;--glow:234,88,12;background:#fff}
+.t-marathon .bleed{min-height:280px;display:flex;align-items:flex-end;padding:var(--pad)}
+.t-marathon .vl{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.6))}
 .t-marathon .cap{position:relative;color:#fff}
-.t-marathon .ttl{font-size:clamp(34px,5.2vw,58px);font-weight:800}
+.t-marathon .ttl{font-size:clamp(34px,5vw,56px);font-weight:800}
 .t-marathon .eyebrow{color:#fdba74}
-.t-marathon .body{padding:var(--pad);background:#fff}
-.t-marathon .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+.t-marathon p{margin:0;color:#525b68}
+.t-marathon .chips{display:flex;gap:9px;flex-wrap:wrap}
 .t-marathon .chip{border:1.5px solid #e6e9ee;border-radius:99px;padding:9px 17px;font-size:13.5px;font-weight:600;color:#454e59}
 .t-marathon .chip.on{background:#ea580c;border-color:#ea580c;color:#fff}
 
-/* 7 community */
-.t-community{background:#f6f7f2}
-.t-community .body{padding:var(--pad);max-width:720px;margin:0 auto;text-align:center}
-.t-community .bleed{min-height:240px}
+.t-community{--g1:#4d7c0f;--g2:#bef264;--glow:77,124,15;background:#f6f7f2;color:#3c4136}
+.t-community .bleed{min-height:230px}
 .t-community .eyebrow{color:#4d7c0f}
-.t-community .ttl{font-size:clamp(28px,3.8vw,44px);font-weight:700;margin:14px 0 12px}
-.t-community p{color:#59604f;margin:0 auto 26px;max-width:46ch}
-.t-community .free{display:inline-block;background:#dcfce7;color:#166534;font-weight:700;font-size:12px;letter-spacing:.09em;text-transform:uppercase;padding:6px 13px;border-radius:99px;margin-bottom:16px}
+.t-community .ttl{font-size:clamp(28px,3.6vw,42px);font-weight:700}
+.t-community p{color:#59604f;max-width:46ch;margin:0}
+.t-community .free{display:inline-block;background:#dcfce7;color:#166534;font-weight:700;font-size:12px;letter-spacing:.09em;text-transform:uppercase;padding:6px 13px;border-radius:99px}
 
-/* 8 private */
-.t-private{background:#101014;color:#f4f1ea}
-.t-private .bleed{min-height:300px}
-.t-private .img{filter:grayscale(.55) brightness(.62)}
-.t-private .body{padding:var(--pad);max-width:680px;margin:0 auto;text-align:center}
+.t-private{--g1:#c9a227;--g2:#f4e4a6;--glow:201,162,39;background:#101014;color:#f4f1ea}
+.t-private .bleed{min-height:280px}
+.t-private .img{filter:grayscale(.55) brightness(.6)}
 .t-private .eyebrow{color:#c9a227}
-.t-private .ttl{font-family:var(--serif);font-size:clamp(28px,3.8vw,44px);font-weight:400;margin:14px 0 12px}
-.t-private p{color:#9c968a;margin:0 auto 24px;max-width:46ch}
-.t-private .key{display:inline-flex;align-items:center;gap:9px;border:1px dashed #3a3a42;border-radius:10px;padding:11px 18px;font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#c9a227;margin-bottom:26px}
+.t-private .ttl{font-family:var(--serif);font-size:clamp(28px,3.6vw,42px);font-weight:400}
+.t-private p{color:#9c968a;max-width:46ch;margin:0}
+.t-private .key{display:inline-flex;align-items:center;gap:9px;border:1px dashed #3a3a42;border-radius:10px;padding:11px 18px;font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#c9a227}
 
-/* ---------------- note strip ---------------- */
 .note{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}
-.note .wrap{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
-.note .n{flex:1;min-width:230px}
+.note .wrap{display:flex;gap:16px;flex-wrap:wrap}
+.note .n{flex:1;min-width:220px}
 .note h4{margin:0 0 3px;font-size:14px}
 .note p{margin:0;font-size:13.5px;color:var(--ink3)}
-
 footer{padding:46px 0 70px;text-align:center}
 footer p{color:var(--ink3);font-size:13.5px;margin:0 0 6px}
 footer a{color:var(--brand)}
-.placeholder{padding:56px 22px;text-align:center;color:var(--ink3);font-size:14px;background:#fff}
 </style>
 </head>
 <body>
@@ -200,42 +228,57 @@ footer a{color:var(--brand)}
   <div class="wrap">
     <div class="logo">Quicket <i>embeds</i></div>
     <div class="spacer"></div>
-    <div class="mini"><span class="pill" id="live-pill">Loading event</span></div>
+    <label class="hctl">Widget height
+      <input type="range" id="h" min="280" max="900" step="10" value="400">
+      <span class="hval" id="hv">400</span>
+    </label>
+    <span class="pill" id="count">0 of 8 loaded</span>
   </div>
 </div>
 
 <div class="hero">
   <div class="wrap">
-    <div class="kick">One embed, every kind of event</div>
-    <h1>Your tickets. <em>Their</em> website.</h1>
-    <p class="sub">Paste a Quicket embed code and watch the exact same checkout come to life inside eight finished event pages.</p>
+    <div class="kick">Every buyer surface, one embed</div>
+    <h1>Whatever the event <em>needs</em>.</h1>
+    <p class="sub">Seat maps, promo codes, registration gates, hidden tiers and offline entry. Load one Quicket event per capability and watch each of them run live inside a finished page on someone else's domain.</p>
+  </div>
+</div>
 
-    <div class="paste">
-      <div class="paste-box">
-        <textarea id="input" spellcheck="false" placeholder='Paste your iFrame code, embed URL, or a Quicket event link…'></textarea>
-        <button class="go" id="run">Show me</button>
+<div class="load" id="load">
+  <div class="wrap">
+    <div class="loadhead">
+      <div>
+        <div class="stepnum"><b>1</b> Load your events</div>
+        <p>One event per capability. Paste an iFrame code, an embed URL or an event link. Anything you leave blank falls back to the first event you load, so the page is never broken.</p>
       </div>
-      <div class="status" id="status"></div>
-      <p class="hint">Event dashboard → Settings → Integrations → Widget → copy the iFrame code.</p>
+      <div class="spacer"></div>
+      <button class="toggle" id="toggle">Hide</button>
     </div>
+
+    <div class="master">
+      <input id="all" spellcheck="false" placeholder="Fill every empty slot with one event…">
+      <button id="allgo">Fill all</button>
+    </div>
+
+    <div class="slots" id="slots"></div>
   </div>
 </div>
 
 <div class="chooser">
   <div class="wrap">
-    <h2>Choose an event type</h2>
+    <div class="stepnum"><b>2</b> Pick a capability</div>
     <div class="grid" id="grid"></div>
   </div>
 </div>
 
 <div class="stage">
   <div class="wrap">
+    <div class="stepnum"><b>3</b> See it in place</div>
+    <div class="proves" id="proves"></div>
     <div class="browser">
-      <div class="chrome">
-        <i></i><i></i><i></i>
-        <div class="addr" id="addr">https://</div>
-      </div>
-      <div class="viewport" id="viewport"></div>
+      <div class="chrome"><i></i><i></i><i></i><div class="addr" id="addr">https://</div></div>
+      <div id="viewport"></div>
+      <div class="warn" id="warn" style="display:none"></div>
     </div>
   </div>
 </div>
@@ -255,219 +298,288 @@ footer a{color:var(--brand)}
 </footer>
 
 <script>
-/* =======================================================================
-   IMAGES. Swap any URL here. If one fails to load the template falls back
-   to its gradient, so a dead link never shows a broken image.
-   Grab replacements from unsplash.com, click a photo, Download, and paste
-   the images.unsplash.com URL.
-   ======================================================================= */
+/* ======================================================================
+   IMAGES. Swap any URL. Each sits on a gradient, so a dead link degrades
+   to the gradient rather than a broken image.
+   ====================================================================== */
 const IMG = {
-  festival : "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=70",
-  conference:"https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=70",
-  sports   : "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=70",
-  concert  : "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=70",
-  theatre  : "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1600&q=70",
-  marathon : "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1600&q=70",
-  community: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=70",
-  private  : "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1600&q=70"
+  tiers    : "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=70",
+  register : "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=70",
+  slots    : "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=70",
+  promo    : "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=70",
+  seating  : "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1600&q=70",
+  offline  : "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1600&q=70",
+  rsvp     : "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=70",
+  access   : "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1600&q=70"
 };
-
-/* gradient shown underneath every image, and alone if the image fails */
 const GRAD = {
-  festival : "linear-gradient(135deg,#f97316,#db2777 55%,#7c3aed)",
-  conference:"linear-gradient(135deg,#1e3a8a,#0ea5e9)",
-  sports   : "linear-gradient(135deg,#052e2b,#0f766e 60%,#134e4a)",
-  concert  : "linear-gradient(135deg,#2e1065,#7c3aed 50%,#db2777)",
-  theatre  : "linear-gradient(135deg,#78350f,#b45309 60%,#d6b370)",
-  marathon : "linear-gradient(135deg,#c2410c,#f59e0b)",
-  community: "linear-gradient(135deg,#365314,#84cc16)",
-  private  : "linear-gradient(135deg,#0c0a09,#44403c 60%,#a8a29e)"
+  tiers    : "linear-gradient(135deg,#f97316,#db2777 55%,#7c3aed)",
+  register : "linear-gradient(135deg,#1e3a8a,#0ea5e9)",
+  slots    : "linear-gradient(135deg,#052e2b,#0f766e 60%,#134e4a)",
+  promo    : "linear-gradient(135deg,#2e1065,#7c3aed 50%,#db2777)",
+  seating  : "linear-gradient(135deg,#78350f,#b45309 60%,#d6b370)",
+  offline  : "linear-gradient(135deg,#c2410c,#f59e0b)",
+  rsvp     : "linear-gradient(135deg,#365314,#84cc16)",
+  access   : "linear-gradient(135deg,#0c0a09,#44403c 60%,#a8a29e)"
 };
 
-/* default event, replaced the moment anything is pasted */
-let EVENT = { domain:"quicket.co.ug", id:"384462", slug:"the-dotb-picnic-2nd-edition" };
+/* ======================================================================
+   THE EIGHT CAPABILITIES. Each one is a structural claim, shown inside
+   the event page design that suits it.
+   ====================================================================== */
+const SLOTS = [
+  { key:"tiers",    label:"Ticket tiers",        ctx:"Festival page",
+    proves:"Several tiers compared side by side, without the buyer leaving the page." },
+  { key:"register", label:"Registration first",  ctx:"Conference page",
+    proves:"Approval gates the purchase, so there are no per-person codes to generate or chase." },
+  { key:"slots",    label:"Time slots",          ctx:"Fixtures page",
+    proves:"A whole season or run sold from one embed with a date picker." },
+  { key:"promo",    label:"Promo codes",         ctx:"Concert page",
+    proves:"Discounts applied inside the embed, on a domain that is not ours." },
+  { key:"seating",  label:"Reserved seating",    ctx:"Theatre page",
+    proves:"Seat maps, and the honest case for linking out instead of embedding." },
+  { key:"offline",  label:"Group and offline",   ctx:"Marathon page",
+    proves:"Group entry and per-buyer limits, with USSD reaching buyers who never load a page." },
+  { key:"rsvp",     label:"Free RSVP",           ctx:"Community page",
+    proves:"Free entry with a real scannable ticket and enforced capacity, at no commission." },
+  { key:"access",   label:"Access codes",        ctx:"Members page",
+    proves:"Hidden tiers revealed by code, for members, sponsors and pre-sale." }
+];
+
+let EV = {};            /* key -> parsed event, or undefined */
+let H  = 400;
+let current = "tiers";
 
 /* ---------- parsing ---------- */
 function parseInput(raw){
   if(!raw || !raw.trim()) return null;
   const s = raw.trim();
   const dom = (s.match(/quicket\.co\.(ug|ke|za)/i) || [])[0] || "quicket.co.ug";
-
   let id   = (s.match(/productid=(\d+)/i) || [])[1];
   let slug = (s.match(/productname=([A-Za-z0-9._~-]+)/i) || [])[1];
-
   if(!id){
     const m = s.match(/\/events\/(\d+)-([A-Za-z0-9._~-]+)/i);
-    if(m){ id = m[1]; slug = slug || m[2]; }
+    if(m){ id=m[1]; slug=slug||m[2]; }
   }
   if(!id){
     const only = s.match(/^\s*(\d{4,})\s*$/);
-    if(only){ id = only[1]; slug = slug || "event"; }
+    if(only){ id=only[1]; slug=slug||"event"; }
   }
   if(!id) return null;
   return { domain:dom.toLowerCase(), id:id, slug:(slug||"event").replace(/\/+$/,"") };
 }
-
 const embedSrc = e => "https://www."+e.domain+"/embed.aspx?productid="+encodeURIComponent(e.id)
   +"&productname="+encodeURIComponent(e.slug)+"&embed=true&v=2";
 const eventSrc = e => "https://www."+e.domain+"/events/"+e.id+"-"+e.slug+"/";
 const pretty   = e => e.slug.replace(/[-_]+/g," ").replace(/\b\w/g,c=>c.toUpperCase());
 
-function widget(h){
-  return '<div class="slot"><iframe src="'+embedSrc(EVENT)+'" height="'+h+'" scrolling="yes" '
-       + 'frameborder="0" loading="lazy" title="Quicket ticket widget"></iframe></div>';
-}
-function bleed(key, extra){
-  return '<div class="bleed" style="background:'+GRAD[key]+'">'
-       + '<div class="img" data-img="'+key+'"></div><div class="vl"></div>'+(extra||"")+'</div>';
-}
+function firstEvent(){ for(const s of SLOTS){ if(EV[s.key]) return EV[s.key]; } return null; }
+function eventFor(k){ return EV[k] || firstEvent(); }
+function isOwn(k){ return !!EV[k]; }
 
-/* ---------- templates ---------- */
-const TPL = {
-festival:{
-  name:"Festival", host:"sunsetfest.co.ug/tickets",
-  html:()=>'<div class="tpl t-festival">'
-    + bleed("festival",'<div class="cap"><div class="eyebrow">Sat 19 December · Kingdom Kampala</div>'
-      + '<h2 class="ttl">'+pretty(EVENT)+'</h2></div>')
-    + '<div class="body"><div><h3>All day, one ticket</h3>'
-    + '<p>Doors at noon. Six stages, twenty artists, and the sun going down over the whole thing. '
-    + 'Grab your tier before the early release runs out.</p></div>'
-    + widget(660) + '</div></div>'
-},
-conference:{
-  name:"Conference", host:"summit.africa/attend",
-  html:()=>'<div class="tpl t-conference"><div class="split">'
-    + bleed("conference")
-    + '<div class="pane"><div class="eyebrow">14–15 May · Nairobi</div>'
-    + '<h2 class="ttl">'+pretty(EVENT)+'</h2><div class="rule"></div>'
-    + '<div class="row"><b>Format</b><span>Two days, four tracks, 40 speakers</span></div>'
-    + '<div class="row"><b>Includes</b><span>Lunch, workshops and the evening reception</span></div>'
-    + '<div class="row"><b>Rate</b><span>Member pricing unlocks after approval</span></div>'
-    + '</div></div><div class="body">'+widget(680)+'</div></div>'
-},
-sports:{
-  name:"Sports", host:"kampalafc.ug/fixtures",
-  html:()=>'<div class="tpl t-sports">'
-    + bleed("sports",'<div class="cap"><div class="eyebrow">Matchday 14 · Home</div>'
-      + '<h2 class="ttl">'+pretty(EVENT)+'</h2></div>')
-    + '<div class="body"><div>'
-    + '<div class="fx on"><span>Sat 19:00</span><b>Buy now</b></div>'
-    + '<div class="fx"><span>Sat 26 · Away</span><span>Members only</span></div>'
-    + '<div class="fx"><span>Wed 30 · Cup</span><span>Opens Monday</span></div>'
-    + '<div class="fx"><span>Sat 07 · Home</span><span>Opens Monday</span></div>'
-    + '</div>'+widget(620)+'</div></div>'
-},
-concert:{
-  name:"Concert", host:"themezzanine.ug",
-  html:()=>'<div class="tpl t-concert">'
-    + '<div class="bleed" style="background:'+GRAD.concert+'"><div class="img" data-img="concert"></div>'
-    + '<div class="vl"></div><div class="inner" style="position:relative;width:100%">'
-    + '<div class="cap"><div class="eyebrow">Live · Main room</div>'
-    + '<h2 class="ttl">'+pretty(EVENT)+'</h2>'
-    + '<p style="color:#b9b4c4;margin:0">Doors 21:00. Strictly limited capacity, no door sales.</p></div>'
-    + '<div class="float">'+widget(470)+'</div>'
-    + '</div></div></div>'
-},
-theatre:{
-  name:"Theatre", host:"nationaltheatre.ug/booking",
-  html:()=>{
-    let seats=""; for(let i=0;i<72;i++) seats+='<i class="'+([5,6,13,22,23,31,40,41,55,56,57].includes(i)?"x":"")+'"></i>';
-    return '<div class="tpl t-theatre">'+bleed("theatre")
-    + '<div class="body"><div class="eyebrow">Evening performance</div>'
-    + '<h2 class="ttl">'+pretty(EVENT)+'</h2>'
-    + '<p>Choose your seats on the full plan, where the map has the room it needs. '
-    + 'An embedded seat picker in a narrow column is worse than a link that works.</p>'
-    + '<div class="seatmap">'+seats+'</div>'
-    + '<a class="cta" href="'+eventSrc(EVENT)+'" target="_blank" rel="noopener">Open the seat map</a>'
-    + '</div></div>';
-  }
-},
-marathon:{
-  name:"Marathon", host:"kampalarun.ug/enter",
-  html:()=>'<div class="tpl t-marathon">'
-    + bleed("marathon",'<div class="cap"><div class="eyebrow">Entries open</div>'
-      + '<h2 class="ttl">'+pretty(EVENT)+'</h2></div>')
-    + '<div class="body"><div class="chips"><span class="chip on">5 km</span><span class="chip">10 km</span>'
-    + '<span class="chip">21 km</span><span class="chip">42 km</span>'
-    + '<span class="chip">Enter by USSD</span></div>'
-    + widget(680)+'</div></div>'
-},
-community:{
-  name:"Community", host:"makerspace.ug/rsvp",
-  html:()=>'<div class="tpl t-community">'+bleed("community")
-    + '<div class="body"><span class="free">Free entry</span>'
-    + '<h2 class="ttl">'+pretty(EVENT)+'</h2>'
-    + '<p>RSVP for a real scannable ticket and an accurate head count on the night. '
-    + 'Free tickets carry no commission.</p>'
-    + widget(560)+'</div></div>'
-},
-private:{
-  name:"Private", host:"members.thelodge.ug",
-  html:()=>'<div class="tpl t-private">'+bleed("private")
-    + '<div class="body"><div class="eyebrow">Members and invited guests</div>'
-    + '<h2 class="ttl">'+pretty(EVENT)+'</h2>'
-    + '<p>This tier is hidden from the public listing. Enter your code below to reveal it.</p>'
-    + '<div class="key">ACCESS CODE REQUIRED</div>'
-    + widget(560)+'</div></div>'
+function widget(k){
+  const e = eventFor(k);
+  if(!e) return '<div style="padding:54px 20px;text-align:center;color:#7d8794;font-size:14px;'
+    + 'border:2px dashed #d7dde3;border-radius:16px;max-width:540px;width:100%">'
+    + 'Load an event in step 1 to see the live widget here.</div>';
+  return '<div class="slot"><div class="slot-in"><iframe src="'+embedSrc(e)+'" height="'+H+'" '
+    + 'scrolling="yes" frameborder="0" loading="lazy" title="Quicket ticket widget"></iframe></div></div>';
 }
+function title(k){ const e=eventFor(k); return e ? pretty(e) : "Your Event Name"; }
+function bleed(k,inner){
+  return '<div class="bleed" style="background:'+GRAD[k]+'"><div class="img" data-img="'+k+'"></div>'
+       + '<div class="vl"></div>'+(inner||"")+'</div>';
+}
+function duo(k,left){ return '<div class="duo"><div class="side">'+left+'</div><div class="fit">'+widget(k)+'</div></div>'; }
+
+/* ---------- templates, one per capability ---------- */
+const TPL = {
+tiers:{ host:"sunsetfest.co.ug/tickets", html:()=>
+  '<div class="tpl t-festival">'
+  + bleed("tiers",'<div class="cap"><div class="eyebrow">Sat 19 December · Kingdom Kampala</div><h2 class="ttl">'+title("tiers")+'</h2></div>')
+  + duo("tiers",'<h3>All day, one ticket</h3>'
+      + '<p>Every tier visible at once, compared in place. No click through to a price list somewhere else.</p>'
+      + '<div class="facts"><div><b>Gates</b><span>12:00 until late</span></div>'
+      + '<div><b>Venue</b><span>Kingdom Kampala, Nile Avenue</span></div>'
+      + '<div><b>Age</b><span>18 and over, ID at the gate</span></div>'
+      + '<div><b>Parking</b><span>On site, free before 14:00</span></div></div>')
+  + '</div>' },
+
+register:{ host:"summit.africa/attend", html:()=>
+  '<div class="tpl t-conference">'+bleed("register")
+  + duo("register",'<span class="tag" style="color:#1d4ed8">Approval required</span>'
+      + '<div class="eyebrow">14–15 May · Nairobi</div><h2 class="ttl">'+title("register")+'</h2>'
+      + '<p>The form is completed inside the embed before any ticket is released. Approve manually and the registration is the gate, which removes the spreadsheet and the codes entirely.</p>'
+      + '<div class="facts"><div><b>Format</b><span>Two days, four parallel tracks</span></div>'
+      + '<div><b>Includes</b><span>Lunch, workshops, evening reception</span></div>'
+      + '<div><b>Rate</b><span>Member pricing unlocks on approval</span></div>'
+      + '<div><b>Closes</b><span>Registration ends 1 May</span></div></div>')
+  + '</div>' },
+
+slots:{ host:"kampalafc.ug/fixtures", html:()=>
+  '<div class="tpl t-sports">'
+  + bleed("slots",'<div class="cap"><div class="eyebrow">Matchday 14 · Home</div><h2 class="ttl">'+title("slots")+'</h2></div>')
+  + duo("slots",'<span class="tag" style="color:#5eead4">One embed, every date</span>'
+      + '<div class="fx on"><span>Sat 19:00 · Home</span><b>On sale</b></div>'
+      + '<div class="fx"><span>Sat 26 · Away</span><span>Members only</span></div>'
+      + '<div class="fx"><span>Wed 30 · Cup</span><span>Opens Monday</span></div>'
+      + '<div class="fx"><span>Sat 07 · Home</span><span>Opens Monday</span></div>'
+      + '<div class="fx"><span>Sat 14 · Home</span><span>Opens Monday</span></div>')
+  + '</div>' },
+
+promo:{ host:"themezzanine.ug", html:()=>
+  '<div class="tpl t-concert"><div class="bleed" style="background:'+GRAD.promo+'">'
+  + '<div class="img" data-img="promo"></div><div class="vl"></div>'
+  + duo("promo",'<div class="eyebrow">Live · Main room</div><h2 class="ttl">'+title("promo")+'</h2>'
+      + '<p>Enter the code in the widget and the price changes without a redirect. Discount, early release and bulk pricing all resolve on this page.</p>'
+      + '<div class="code">CODE: EARLY25</div>'
+      + '<div class="facts"><div><b>Doors</b><span>21:00</span></div>'
+      + '<div><b>On stage</b><span>23:30</span></div>'
+      + '<div><b>Age</b><span>18 and over</span></div></div>')
+  + '</div></div>' },
+
+seating:{ host:"nationaltheatre.ug/booking", html:()=>{
+  let seats=""; for(let i=0;i<72;i++) seats+='<i class="'+([5,6,13,22,23,31,40,41,55,56,57].indexOf(i)>-1?"x":"")+'"></i>';
+  const e=eventFor("seating");
+  return '<div class="tpl t-theatre">'+bleed("seating")
+  + '<div class="solo"><div class="eyebrow">Evening performance</div><h2 class="ttl">'+title("seating")+'</h2>'
+  + '<p>A seat map needs width and precision. In a narrow column on someone else\'s page it stops being usable, so this is the one case where the link beats the embed. Saying so is what makes the other seven credible.</p>'
+  + '<div class="seatmap">'+seats+'</div>'
+  + '<a class="cta" href="'+(e?eventSrc(e):"#")+'" target="_blank" rel="noopener">Open the seat map</a></div></div>'; } },
+
+offline:{ host:"kampalarun.ug/enter", html:()=>
+  '<div class="tpl t-marathon">'
+  + bleed("offline",'<div class="cap"><div class="eyebrow">Entries open</div><h2 class="ttl">'+title("offline")+'</h2></div>')
+  + duo("offline",'<div class="chips"><span class="chip on">5 km</span><span class="chip">10 km</span>'
+      + '<span class="chip">21 km</span><span class="chip">42 km</span></div>'
+      + '<p>Category, shirt size and emergency contact collected once, returned in a single export. An entrant with no data bundle is still an entrant, so the same event takes entries over USSD.</p>'
+      + '<div class="facts"><div><b>Start</b><span>06:30, Kololo</span></div>'
+      + '<div><b>Cut off</b><span>Six hours</span></div>'
+      + '<div><b>No data?</b><span>Enter by USSD, pay by mobile money</span></div></div>')
+  + '</div>' },
+
+rsvp:{ host:"makerspace.ug/rsvp", html:()=>
+  '<div class="tpl t-community">'+bleed("rsvp")
+  + '<div class="solo"><span class="free">Free entry</span><h2 class="ttl">'+title("rsvp")+'</h2>'
+  + '<p>A form gives you a list of names. This gives you a scannable ticket, an enforced capacity and an accurate head count on the night. Free tickets carry no commission.</p>'
+  + widget("rsvp")+'</div></div>' },
+
+access:{ host:"members.thelodge.ug", html:()=>
+  '<div class="tpl t-private">'+bleed("access")
+  + '<div class="solo"><div class="eyebrow">Members and invited guests</div><h2 class="ttl">'+title("access")+'</h2>'
+  + '<p>The tier is hidden from the public listing and revealed only by code. One shared code for a group, or unique single use codes imported as a CSV.</p>'
+  + '<div class="key">ACCESS CODE REQUIRED</div>'
+  + widget("access")+'</div></div>' }
 };
 
-/* ---------- render ---------- */
-const order = ["festival","conference","sports","concert","theatre","marathon","community","private"];
-const grid = document.getElementById("grid");
-const viewport = document.getElementById("viewport");
-const addr = document.getElementById("addr");
-let current = "festival";
+/* ---------- step 1 ---------- */
+const slotsEl=document.getElementById("slots");
+SLOTS.forEach(function(s){
+  const row=document.createElement("div");
+  row.className="slotrow"; row.dataset.k=s.key;
+  row.innerHTML='<div class="srh"><i class="dotst"></i><strong>'+s.label+'</strong>'
+    + '<span class="ctx">'+s.ctx+'</span></div>'
+    + '<p class="srp">'+s.proves+'</p>'
+    + '<input spellcheck="false" placeholder="iFrame, embed URL or event link…">'
+    + '<div class="meta"></div>';
+  const inp=row.querySelector("input");
+  function take(){
+    const p=parseInput(inp.value);
+    if(p){ EV[s.key]=p; } else { delete EV[s.key]; }
+    save(); refreshRow(s.key); refreshCounts(); paint();
+  }
+  inp.addEventListener("change",take);
+  inp.addEventListener("paste",function(){ setTimeout(take,40); });
+  slotsEl.appendChild(row);
+});
+function refreshRow(k){
+  const row=slotsEl.querySelector('[data-k="'+k+'"]');
+  const e=EV[k];
+  row.classList.toggle("has",!!e);
+  row.querySelector(".meta").textContent = e ? (e.id+" · "+e.slug+" · "+e.domain) : "";
+}
+function refreshCounts(){
+  const n=SLOTS.filter(s=>EV[s.key]).length;
+  document.getElementById("count").textContent=n+" of 8 loaded";
+  Array.prototype.forEach.call(grid.children,function(b){ b.classList.toggle("has",isOwn(b.dataset.k)); });
+}
+document.getElementById("allgo").addEventListener("click",function(){
+  const p=parseInput(document.getElementById("all").value);
+  if(!p) return;
+  SLOTS.forEach(function(s){ if(!EV[s.key]) EV[s.key]=p; });
+  SLOTS.forEach(function(s){
+    const row=slotsEl.querySelector('[data-k="'+s.key+'"]');
+    if(!row.querySelector("input").value) row.querySelector("input").value=embedSrc(EV[s.key]);
+    refreshRow(s.key);
+  });
+  save(); refreshCounts(); paint();
+});
+document.getElementById("toggle").addEventListener("click",function(){
+  const on=document.getElementById("load").classList.toggle("collapsed");
+  this.textContent=on?"Show":"Hide";
+});
 
-order.forEach(function(k){
+/* ---------- step 2 ---------- */
+const grid=document.getElementById("grid"), viewport=document.getElementById("viewport"),
+      addr=document.getElementById("addr"), proves=document.getElementById("proves"),
+      warn=document.getElementById("warn");
+SLOTS.forEach(function(s){
   const b=document.createElement("button");
-  b.className="pick"; b.type="button"; b.dataset.k=k;
-  b.setAttribute("aria-pressed", k===current?"true":"false");
-  b.innerHTML='<span class="ph" style="background-image:url(\''+IMG[k]+'\'),'+GRAD[k]+'"></span>'
-            + '<span class="vl"></span><span class="lb">'+TPL[k].name+'</span>';
-  b.addEventListener("click",function(){ current=k; paint(); });
+  b.className="pick"; b.type="button"; b.dataset.k=s.key;
+  b.setAttribute("aria-pressed", s.key===current?"true":"false");
+  b.innerHTML='<span class="ph" style="background-image:url(\''+IMG[s.key]+'\'),'+GRAD[s.key]+'"></span>'
+    + '<span class="vl"></span><span class="flag"></span>'
+    + '<span class="lb"><b>'+s.label+'</b><span>'+s.ctx+'</span></span>';
+  b.addEventListener("click",function(){ current=s.key; paint(); });
   grid.appendChild(b);
 });
 
+/* ---------- step 3 ---------- */
 function paint(){
+  const s=SLOTS.find(x=>x.key===current);
   Array.prototype.forEach.call(grid.children,function(b){
     b.setAttribute("aria-pressed", b.dataset.k===current?"true":"false");
   });
-  addr.textContent = "https://"+TPL[current].host;
-  viewport.innerHTML = TPL[current].html();
+  proves.innerHTML='<b>'+s.label+'</b><span>'+s.proves+'</span>';
+  addr.textContent="https://"+TPL[current].host;
+  viewport.innerHTML=TPL[current].html();
   viewport.querySelectorAll("[data-img]").forEach(function(el){
     const k=el.getAttribute("data-img"), im=new Image();
     im.onload=function(){ el.style.backgroundImage="url('"+IMG[k]+"')"; };
     im.src=IMG[k];
   });
-  document.getElementById("live-pill").textContent = pretty(EVENT)+" · "+EVENT.domain;
+  if(!EV[current] && firstEvent()){
+    warn.style.display="block";
+    warn.textContent="No dedicated event loaded for "+s.label.toLowerCase()+", so this is showing your first event instead. Add one in step 1 to demonstrate the capability properly.";
+  } else { warn.style.display="none"; }
 }
 
-/* ---------- paste handling ---------- */
-const input=document.getElementById("input"), status=document.getElementById("status");
-function apply(raw,quiet){
-  const p=parseInput(raw);
-  if(!p){
-    if(!quiet) status.innerHTML='<span class="bad">Could not find a product id in that. Paste the whole iFrame code, the embed URL, or an event link.</span>';
-    return false;
-  }
-  EVENT=p;
-  status.innerHTML='<span class="ok">Loaded</span> <span style="color:var(--ink3)">'+p.id+' · '+p.slug+' · '+p.domain+'</span>';
-  try{ localStorage.setItem("qk-embed", JSON.stringify(p)); }catch(e){}
-  paint();
-  return true;
-}
-document.getElementById("run").addEventListener("click",function(){ apply(input.value); });
-input.addEventListener("keydown",function(e){
-  if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){ e.preventDefault(); apply(input.value); }
+/* ---------- height ---------- */
+const hIn=document.getElementById("h"), hOut=document.getElementById("hv");
+hIn.addEventListener("input",function(){
+  H=+hIn.value; hOut.textContent=H;
+  viewport.querySelectorAll(".slot-in iframe").forEach(function(f){ f.setAttribute("height",H); f.style.height=H+"px"; });
+  try{ localStorage.setItem("qk-h",H); }catch(e){}
 });
-input.addEventListener("paste",function(){ setTimeout(function(){ apply(input.value,true); },40); });
 
-/* restore last pasted event, then draw */
+/* ---------- persistence ---------- */
+function save(){ try{ localStorage.setItem("qk-slots",JSON.stringify(EV)); }catch(e){} }
 try{
-  const saved=JSON.parse(localStorage.getItem("qk-embed")||"null");
-  if(saved&&saved.id) EVENT=saved;
+  const saved=JSON.parse(localStorage.getItem("qk-slots")||"{}");
+  if(saved && typeof saved==="object"){
+    SLOTS.forEach(function(s){
+      if(saved[s.key] && saved[s.key].id){
+        EV[s.key]=saved[s.key];
+        slotsEl.querySelector('[data-k="'+s.key+'"] input').value=embedSrc(saved[s.key]);
+      }
+    });
+  }
+  const h=parseInt(localStorage.getItem("qk-h")||"",10);
+  if(h>=280&&h<=900){ H=h; hIn.value=h; hOut.textContent=h; }
 }catch(e){}
+
+SLOTS.forEach(s=>refreshRow(s.key));
+refreshCounts();
 paint();
 </script>
 </body>
