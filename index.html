@@ -117,24 +117,34 @@ h1 em{font-style:normal;color:var(--brand)}
 .tpl .cta{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;padding:15px 30px;border-radius:99px}
 .tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:rgba(127,127,127,.14);width:fit-content}
 
-/* widget card with the animated border */
-.slot{position:relative;overflow:hidden;border-radius:20px;padding:3px;width:100%;max-width:540px;animation:qk-glow 3.4s ease-in-out infinite}
-.slot::before{content:"";position:absolute;inset:-70%;z-index:0;
-  background:conic-gradient(from 0deg,transparent 0deg 150deg,var(--g1) 215deg,var(--g2) 262deg,var(--g1) 300deg,transparent 355deg);
-  animation:qk-spin 4.2s linear infinite}
-.slot::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:17px;z-index:1}
+/* widget card with the animated border.
+   The gradient is the card's own background, rotated by an animated angle.
+   No pseudo element, so nothing can escape the rounded corners. */
+@property --qk-a{syntax:'<angle>';initial-value:0deg;inherits:false}
+.slot{
+  position:relative;border-radius:20px;padding:3px;width:100%;max-width:540px;
+  background:
+    conic-gradient(from var(--qk-a),
+      rgba(0,0,0,0) 0deg 150deg,
+      var(--g1) 215deg, var(--g2) 262deg, var(--g1) 300deg,
+      rgba(0,0,0,0) 355deg),
+    linear-gradient(0deg,#e7ebee,#e7ebee);
+  animation:qk-a 4.2s linear infinite, qk-glow 3.4s ease-in-out infinite;
+}
+@keyframes qk-a{to{--qk-a:360deg}}
 /* the widget is centred in the card, never pinned to the top edge.
    min-height keeps a balanced frame around a short widget, and the card
    grows on its own once the widget is taller than that. */
 .slot-in{position:relative;z-index:2;border-radius:17px;overflow:hidden;background:#fff;
   padding:20px 16px;display:flex;align-items:center;justify-content:center;min-height:var(--cardmin,380px)}
 .slot-in iframe{display:block;width:100%;border:0;flex:0 0 auto}
-@keyframes qk-spin{to{transform:rotate(360deg)}}
 @keyframes qk-glow{
-  0%,100%{box-shadow:0 0 0 0 rgba(var(--glow),.30),0 18px 40px -20px rgba(0,0,0,.45)}
-  50%{box-shadow:0 0 0 12px rgba(var(--glow),0),0 18px 40px -20px rgba(0,0,0,.45)}
+  0%,100%{box-shadow:0 0 0 0 rgba(var(--glow),.26),0 18px 40px -20px rgba(0,0,0,.45)}
+  50%{box-shadow:0 0 0 10px rgba(var(--glow),0),0 18px 40px -20px rgba(0,0,0,.45)}
 }
-@media(prefers-reduced-motion:reduce){.slot,.slot::before{animation:none}.slot{box-shadow:0 18px 40px -20px rgba(0,0,0,.4)}}
+@media(prefers-reduced-motion:reduce){
+  .slot{animation:none;box-shadow:0 18px 40px -20px rgba(0,0,0,.4)}
+}
 
 .duo{display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,52px);align-items:center;padding:var(--pad)}
 @media(min-width:880px){.duo{grid-template-columns:1fr 1fr}}
