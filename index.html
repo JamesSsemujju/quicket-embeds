@@ -129,7 +129,10 @@ h1 em{font-style:normal;color:var(--brand)}
       var(--g1) 215deg, var(--g2) 262deg, var(--g1) 300deg,
       rgba(0,0,0,0) 355deg),
     linear-gradient(0deg,#e7ebee,#e7ebee);
-  animation:qk-a 4.2s linear infinite, qk-glow 3.4s ease-in-out infinite;
+  animation:qk-a 4.2s linear infinite;
+  /* soft blurred shadows only. no spread, so nothing can render as a
+     second hard edged rectangle behind the card. */
+  box-shadow:0 8px 26px -14px rgba(var(--glow),.45), 0 18px 40px -22px rgba(0,0,0,.42);
 }
 @keyframes qk-a{to{--qk-a:360deg}}
 /* the widget is centred in the card, never pinned to the top edge.
@@ -138,13 +141,7 @@ h1 em{font-style:normal;color:var(--brand)}
 .slot-in{position:relative;z-index:2;border-radius:17px;overflow:hidden;background:#fff;
   padding:20px 16px;display:flex;align-items:center;justify-content:center;min-height:var(--cardmin,380px)}
 .slot-in iframe{display:block;width:100%;border:0;flex:0 0 auto}
-@keyframes qk-glow{
-  0%,100%{box-shadow:0 0 0 0 rgba(var(--glow),.26),0 18px 40px -20px rgba(0,0,0,.45)}
-  50%{box-shadow:0 0 0 10px rgba(var(--glow),0),0 18px 40px -20px rgba(0,0,0,.45)}
-}
-@media(prefers-reduced-motion:reduce){
-  .slot{animation:none;box-shadow:0 18px 40px -20px rgba(0,0,0,.4)}
-}
+@media(prefers-reduced-motion:reduce){ .slot{animation:none} }
 
 .duo{display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,52px);align-items:center;padding:var(--pad)}
 @media(min-width:880px){.duo{grid-template-columns:1fr 1fr}}
