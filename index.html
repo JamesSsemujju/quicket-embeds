@@ -33,6 +33,9 @@ body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line
 .hctl input[type=range]{width:120px;accent-color:var(--brand)}
 .hval{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink2);min-width:40px}
 .pill{background:var(--brand-soft);color:var(--brand);font-weight:600;padding:5px 11px;border-radius:99px;font-size:12.5px;white-space:nowrap}
+.fit{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;white-space:nowrap;
+  background:#e8f7f1;color:#0f766e;border:1px solid #bfe3dd;cursor:default}
+.fit.manual{background:#fdf3e3;color:#8a5a12;border-color:#f0dcb4}
 @media(max-width:940px){.hctl{display:none}}
 @media(max-width:620px){.pill{display:none}}
 
@@ -120,7 +123,7 @@ h1 em{font-style:normal;color:var(--brand)}
   background:conic-gradient(from 0deg,transparent 0deg 150deg,var(--g1) 215deg,var(--g2) 262deg,var(--g1) 300deg,transparent 355deg);
   animation:qk-spin 4.2s linear infinite}
 .slot::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:17px;z-index:1}
-.slot-in{position:relative;z-index:2;border-radius:17px;overflow:hidden;background:#fff}
+.slot-in{position:relative;z-index:2;border-radius:17px;overflow:hidden;background:#fff;padding:16px 14px}
 .slot-in iframe{display:block;width:100%;border:0}
 @keyframes qk-spin{to{transform:rotate(360deg)}}
 @keyframes qk-glow{
@@ -228,9 +231,10 @@ footer a{color:var(--brand)}
   <div class="wrap">
     <div class="logo">Quicket <i>embeds</i></div>
     <div class="spacer"></div>
-    <label class="hctl">Widget height
-      <input type="range" id="h" min="280" max="900" step="10" value="400">
-      <span class="hval" id="hv">400</span>
+    <span class="fit" id="fit" title="Auto height needs the widget to report its own size">Auto</span>
+    <label class="hctl">Height
+      <input type="range" id="h" min="200" max="900" step="10" value="320">
+      <span class="hval" id="hv">320</span>
     </label>
     <span class="pill" id="count">0 of 8 loaded</span>
   </div>
@@ -347,7 +351,9 @@ const SLOTS = [
 ];
 
 let EV = {};            /* key -> parsed event, or undefined */
-let H  = 400;
+let H  = 320;           /* height in px */
+let AUTO = true;        /* true until the user touches the slider */
+let autoSeen = false;   /* true once the widget reports its own height */
 let current = "tiers";
 
 /* ---------- parsing ---------- */
@@ -554,12 +560,45 @@ function paint(){
   } else { warn.style.display="none"; }
 }
 
-/* ---------- height ---------- */
-const hIn=document.getElementById("h"), hOut=document.getElementById("hv");
+/* ---------- height ----------
+   Cross origin means the page cannot read the widget's content height.
+   So: listen for a size message from Quicket and use it if one arrives,
+   otherwise fall back to the slider and say plainly which is in force. */
+const hIn=document.getElementById("h"), hOut=document.getElementById("hv"), fitEl=document.getElementById("fit");
+
+function applyHeight(px){
+  H=px; hOut.textContent=px; hIn.value=Math.min(900,Math.max(200,px));
+  viewport.querySelectorAll(".slot-in iframe").forEach(function(f){
+    f.setAttribute("height",px); f.style.height=px+"px";
+  });
+}
+function setFitBadge(){
+  if(AUTO && autoSeen){ fitEl.className="fit"; fitEl.textContent="Auto"; fitEl.title="The widget reported its own height."; }
+  else { fitEl.className="fit manual"; fitEl.textContent="Manual"; fitEl.title="The widget did not report a height, so the slider controls it."; }
+}
+
+/* the widget may post its height. accept several common shapes. */
+window.addEventListener("message",function(e){
+  if(!/^https:\/\/(www\.)?quicket\.co\.(ug|ke|za)$/i.test(e.origin)) return;
+  let px=null, d=e.data;
+  if(typeof d==="number") px=d;
+  else if(d && typeof d==="object") px=d.height||d.h||d.frameHeight||(d.payload&&d.payload.height)||null;
+  else if(typeof d==="string"){
+    try{ const j=JSON.parse(d); px=j.height||j.h||j.frameHeight||null; }
+    catch(_){ if(/height/i.test(d)){ const m=d.match(/(\d{2,4})/); if(m) px=+m[1]; } }
+  }
+  px=parseInt(px,10);
+  if(!px || px<160 || px>4000) return;
+  autoSeen=true;
+  if(AUTO) applyHeight(px+4);
+  setFitBadge();
+});
+
 hIn.addEventListener("input",function(){
-  H=+hIn.value; hOut.textContent=H;
-  viewport.querySelectorAll(".slot-in iframe").forEach(function(f){ f.setAttribute("height",H); f.style.height=H+"px"; });
-  try{ localStorage.setItem("qk-h",H); }catch(e){}
+  AUTO=false;
+  applyHeight(+hIn.value);
+  setFitBadge();
+  try{ localStorage.setItem("qk-h",H); localStorage.setItem("qk-auto","0"); }catch(e){}
 });
 
 /* ---------- persistence ---------- */
@@ -575,12 +614,16 @@ try{
     });
   }
   const h=parseInt(localStorage.getItem("qk-h")||"",10);
-  if(h>=280&&h<=900){ H=h; hIn.value=h; hOut.textContent=h; }
+  if(h>=200&&h<=900){ H=h; hIn.value=h; hOut.textContent=h; }
+  if(localStorage.getItem("qk-auto")==="0") AUTO=false;
 }catch(e){}
 
 SLOTS.forEach(s=>refreshRow(s.key));
 refreshCounts();
 paint();
+setFitBadge();
+/* if nothing has reported a height shortly after load, say so */
+setTimeout(setFitBadge,2500);
 </script>
 </body>
 </html>
